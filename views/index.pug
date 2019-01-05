@@ -2,6 +2,8 @@ html
   head
     title= title
   body
-    h1= message
-    h2 HI!!!
-    a(href="create") forma
+    h1 HI!!!
+    ul
+      each val in users
+        li= val
+    a(href="create") Add Name
