@@ -1,9 +1,13 @@
 {
-  "name": "static",
+  "name": "serverNode",
   "version": "0.0.1",
-  "description": "http",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "description": "server",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Yura",
@@ -12,5 +16,13 @@
     "express": "^4.16.4",
     "mongoose": "^5.4.2",
     "node-static": "^0.7.11"
+  },
+  "repository": "https://github.com/yaxonby/NodeJS-Express-MongoDB.git",
+  "devDependencies": {
+    "body-parser": "^1.18.3",
+    "eslint": "^5.12.0",
+    "eslint-plugin-node": "^8.0.1",
+    "nodemon": "^1.18.9",
+    "pug": "^2.0.3"
   }
 }
