@@ -1,15 +1,38 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+const bodyParser = require("body-parser");
+const formidableMiddleware = require('express-formidable');
+
+app.use(formidableMiddleware());
+
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
 
 const port = 3000;
 
-app.get('/', (req, res) => {
+app.get('/form', (req, res) => {
   console.log(req.query);
-  res.send('hello express!')
+  res.send('hello form!')
 });
-app.post('/index.html', (req, res) => res.send('hello post!'));
+app.get('/get', (req, res) => {
+  console.log(req.query);
+  res.send('hello get!')
+});
+
+app.post('/post', (req, res) => {
+  console.log(req.body, req.fields);
+
+  var app = express();
+  console.log('пришел');
+  res.send('hello post!');
+});
+
 global.console.log('dirname: ', __dirname);
+
 app.use(express.static(path.join(__dirname, '/dist')));
 
 app.listen(port, global.console.log(`Run server on port ${port}`));

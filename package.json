@@ -17,6 +17,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "express-formidable": "^1.2.0",
     "mongoose": "^5.4.2",
     "node-static": "^0.7.11"
   },

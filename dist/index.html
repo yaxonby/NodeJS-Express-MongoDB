@@ -9,19 +9,50 @@
   <button onclick="loadPhones()">Загрузить phones.json!</button>
   <br />
 
-  <form action="/" method="GET" target='_blank'>
-    GET
-    <label for="name">Имя: </label>
-    <input type='text' id="name" name="name">
+  <form action="/form" method="GET" target="_blank">
+    <p>GET from Form </p>
+    <label for="formname">Имя: </label>
+    <input type='text' id="formname" name="formname">
     <input type="submit">
   </form>
 
-  <form method="POST" target="_blank">
-    POST
-    <label for="suname">Имя: </label>
-    <input type='text' id="suname" name="surname">
+  <form target="_blank">
+    <p>GET from XML</p>
+    <label for="name">Имя: </label>
+    <input type='text' id="name" name="name">
+    <input type="submit" onClick="loadGet()">
+  </form>
+
+  <form action="/post" method="POST" target="_blank">
+    <p>POST from Form </p>
+    <label for="postformname">Имя: </label>
+    <input type='text' id="postformname" name="postformname">
+    <input type="submit">
+  </form>
+
+  <form target="_blank">
+    <p>POST from XML</p>
+    <label for="surname">Имя: </label>
+    <input type='text' id="surname" name="surname">
     <button onClick="loadPost()">Отправить форму</button>
   </form>
+
+
+  <form target="_blank" name="formdata">
+    <p>POST from formData</p>
+    <label for="datasurname">Имя: </label>
+    <input type='text' id="datasurname" name="datasurname">
+    <button onClick="loadPostData()">Отправить форму</button>
+  </form>
+
+  <form target="_blank">
+    <p>POST from formData</p>
+    <label for="jsonname">Имя: </label>
+    <input type='text' id="jsonname" name="jsonname">
+    <button onClick="loadPostJson()">Отправить форму</button>
+  </form>
+
+
   <script src='index.js'> </script>
 </body>
 
