@@ -9,7 +9,8 @@
   "scripts": {
     "start": "cross-env PORT=3001 node server.js",
     "dev": "cross-env PORT=3001 nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start1": "nodemon server.js"
   },
   "author": "Yura",
   "license": "ISC",

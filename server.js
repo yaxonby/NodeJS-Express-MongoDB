@@ -1,3 +1,41 @@
+const path = require('path');
+const express = require('express');
+const app = express();
+
+const port = 3000;
+
+app.get('/', (req, res) => {
+  console.log(req.query);
+  res.send('hello express!')
+});
+app.post('/index.html', (req, res) => res.send('hello post!'));
+global.console.log('dirname: ', __dirname);
+app.use(express.static(path.join(__dirname, '/dist')));
+
+app.listen(port, global.console.log(`Run server on port ${port}`));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 var http = require("http");
 var url = require("url");
 var querystring = require("querystring");
@@ -40,3 +78,4 @@ app.listen(config.PORT, () => {
 });
 
 app.use(express.static(".")); //
+*/
