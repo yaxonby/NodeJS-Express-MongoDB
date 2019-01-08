@@ -20,7 +20,8 @@
     <p>GET from XML</p>
     <label for="name">Имя: </label>
     <input type='text' id="name" name="name">
-    <input type="submit" onClick="loadGet()">
+    <input type="submit" onClick="loadGet()" value="XMLRequest">
+    <input type="submit" onClick="loadGetFetch()" value="Fetch">
   </form>
 
   <form action="/post" method="POST" target="_blank">
@@ -34,7 +35,8 @@
     <p>POST from XML</p>
     <label for="surname">Имя: </label>
     <input type='text' id="surname" name="surname">
-    <button onClick="loadPost()">Отправить форму</button>
+    <button onClick="loadPost()">XMLRequest </button>
+    <button onClick="loadPostFetch()"> Fetch Отправить форму</button>
   </form>
 
 
@@ -42,14 +44,16 @@
     <p>POST from formData</p>
     <label for="datasurname">Имя: </label>
     <input type='text' id="datasurname" name="datasurname">
-    <button onClick="loadPostData()">Отправить форму</button>
+    <button onClick="loadPostData()"> XMLRequest </button>
+    <button onClick="loadPostDataFetch()">Fetch Отправить форму</button>
   </form>
 
   <form target="_blank">
     <p>POST from formData</p>
     <label for="jsonname">Имя: </label>
     <input type='text' id="jsonname" name="jsonname">
-    <button onClick="loadPostJson()">Отправить форму</button>
+    <button onClick="loadPostJson()">XMLRequest </button>
+    <button onClick="loadPostJsonFetch()">Fetch Отправить форму</button>
   </form>
 
 

@@ -15,7 +15,18 @@ function loadGet(e) {
       console.log(xhr.responseText);
    }
    xhr.send();
+};
+
+function loadGetFetch() {
+   const name = document.getElementById('name').value;
+   const url = '/get' + '?name=' + encodeURIComponent(name);
+   const promise = fetch(url)
+      .then(function (response) {
+         console.log('response-', response)
+      })
 }
+
+
 
 function loadPost() {
    let name = document.getElementById('surname').value;
@@ -31,6 +42,24 @@ function loadPost() {
       console.log(xhr.readyState)
    }
    xhr.send(body);
+};
+
+function loadPostFetch() {
+   let name = document.getElementById('surname').value;
+   name = encodeURIComponent(name);
+   const body = 'name=' + name;
+
+   const promise = fetch('/post', {
+      method: 'post',
+      headers: {
+         "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+      },
+      body: body
+   }).then(function (response) {
+      console.log(response)
+   }).catch(function (error) {
+      console.log('error-', error)
+   })
 };
 
 function loadPostData() {

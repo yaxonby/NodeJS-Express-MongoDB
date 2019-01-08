@@ -4,7 +4,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const formidableMiddleware = require('express-formidable');
 
-app.use(formidableMiddleware());
+// app.use(formidableMiddleware());
 
 app.use(
   bodyParser.urlencoded({
@@ -18,6 +18,7 @@ app.get('/form', (req, res) => {
   console.log(req.query);
   res.send('hello form!')
 });
+
 app.get('/get', (req, res) => {
   console.log(req.query);
   res.send('hello get!')
@@ -25,8 +26,6 @@ app.get('/get', (req, res) => {
 
 app.post('/post', (req, res) => {
   console.log(req.body, req.fields);
-
-  var app = express();
   console.log('пришел');
   res.send('hello post!');
 });
