@@ -4,7 +4,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const formidableMiddleware = require('express-formidable');
 
-// app.use(formidableMiddleware());
+
+app.use(formidableMiddleware());
 
 app.use(
   bodyParser.urlencoded({
@@ -12,11 +13,28 @@ app.use(
   })
 );
 
+var myLogger = function (req, res, next) {
+  console.log('I use "use" Time:', Date.now())
+  next()
+}
+
+app.use(myLogger)
+
+app.set('views', './views');
+app.set('view engine', 'pug');
+
 const port = 3000;
+let users = ['Tolik', 'Lena'];
+
+app.get('/pug', function (req, res) {
+  res.render('index', {
+    users: users
+  })
+});
 
 app.get('/form', (req, res) => {
   console.log(req.query);
-  res.send('hello form!')
+  res.send('hello form!');
 });
 
 app.get('/get', (req, res) => {
