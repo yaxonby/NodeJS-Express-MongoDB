@@ -39,48 +39,44 @@ const production = !!argv.production;
 // ----
 
 // Styles
-exports.buildStyles = () => {
+exports.buildStyles = () =>
     src(sources.styles)
-        .pipe(sass.sync().on("error", sass.logError))
-        .pipe(gulpif(production, minifycss()))
-        .pipe(dest(dirs.dest))
-        .pipe(livereload());
+    .pipe(sass.sync().on("error", sass.logError))
+    .pipe(gulpif(production, minifycss()))
+    .pipe(dest(dirs.dest))
+    .pipe(livereload());
 
-};
 
 // Views
-exports.buildViews = () => {
+exports.buildViews = () =>
     src(sources.views)
-        .pipe(pug())
-        .pipe(dest(dirs.dest))
-        .pipe(livereload())
-};
+    .pipe(pug())
+    .pipe(dest(dirs.dest))
+    .pipe(livereload());
 
 // Scripts
-exports.buildScripts = () => {
+exports.buildScripts = () =>
     src(sources.scripts)
-        .pipe(
-            babel({
-                presets: ["es2015"]
-            })
-        )
-        .pipe(dest(dirs.dest))
-        .pipe(livereload())
-};
+    .pipe(
+        babel({
+            presets: ["@babel/env"]
+        })
+    )
+    .pipe(dest(dirs.dest))
+    .pipe(livereload());
 
 // Clean
-exports.clean = () => {
+exports.clean = () =>
 
     del(["build"]);
-};
 
 // Watch Task
 exports.devWatch = () => {
     livereload.listen();
-    watch(sources.styles, buildStyles);
-    watch(sources.views, buildViews);
-    watch(sources.scripts, buildScripts);
-};
+    watch(sources.styles, exports.buildStyles);
+    watch(sources.views, exports.buildViews);
+    watch(sources.scripts, exports.buildScripts);
+}
 
 // Development Task
 exports.dev = series(
