@@ -21,7 +21,7 @@ var myLogger = function myLogger(req, res, next) {
 };
 
 app.use(myLogger);
-app.set('views', './views');
+app.set('views', '../../views');
 app.set('view engine', 'pug');
 var port = 3000;
 var users = ['Tolik', 'Lena'];
