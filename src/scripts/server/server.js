@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 // const formidableMiddleware = require('express-formidable');
 const config = require('../../../config.js');
 const database = require('../../../database.js');
+var mongoose = require('mongoose');
 
 //app.use(formidableMiddleware());
 
@@ -61,6 +62,66 @@ app.use(express.static(path.join(__dirname, '/build')));
 
 
 //MongoDB
+
+//
+var kittySchema = new mongoose.Schema({
+  name: String
+});
+
+
+kittySchema.methods.speak = function () {
+  var greeting = this.name ?
+    "Meow name is " + this.name :
+    "I don't have a name";
+  console.log(greeting);
+};
+
+
+var Kitten = mongoose.model('Kitten', kittySchema);
+
+var fluffy = new Kitten({
+  name: 'fluffy'
+});
+fluffy.speak(); // "Meow name is fluffy"
+
+var silence = new Kitten({
+  name: 'Silence'
+});
+console.log(silence.name); // 'Silence'
+
+
+
+function cats() {
+
+
+  fluffy.save(function (err, fluffy) {
+    if (err) return console.error(err);
+    fluffy.speak();
+  });
+
+  Kitten.find(function (err, kittens) {
+    if (err) return console.error(err);
+    console.log(kittens);
+  })
+
+
+}
+
+
+mongoose.connect('mongodb://localhost/test', {
+  useNewUrlParser: true
+});
+
+var db = mongoose.connection;
+db.on('error', global.console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+  global.console.log('подключились к базе данных');
+  cats();
+});
+
+
+
+/*
 database()
   .then(info => {
     global.console.log(`Connected to ${info.host}:${info.port}/${info.name}`);
@@ -73,5 +134,4 @@ database()
     process.exit(1);
   });
 
-
-// app.listen(port, global.console.log(`Run server on port ${port}`));
+*/
