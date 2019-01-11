@@ -8,11 +8,11 @@ module.exports = () => {
 
         mongoose.connection
             .on('error', error => reject(error))
-            .on('close', () => console.log('Database connection closed.'))
+            .on('close', () => global.console.log('Database connection closed.'))
             .once('open', () => resolve(mongoose.connections[0]));
 
         mongoose.connect(config.MONGO_URL, {
-            useMongoClient: true
+            useNewUrlParser: true
         });
-    });
+    })
 };

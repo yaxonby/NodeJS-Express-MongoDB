@@ -2,10 +2,9 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
-const formidableMiddleware = require('express-formidable');
+// const formidableMiddleware = require('express-formidable');
 const config = require('../../../config.js');
-
-console.log(config.PORT);
+const database = require('../../../database.js');
 
 //app.use(formidableMiddleware());
 
@@ -16,7 +15,7 @@ app.use(
 );
 
 var myLogger = function (req, res, next) {
-  console.log('I use "use" Time:', Date.now())
+  global.console.log('I use "use" Time:', Date.now())
   next()
 }
 
@@ -37,95 +36,42 @@ app.get('/pug', function (req, res) {
 app.get('/create', (req, res) => res.render('create'));
 
 app.post("/create", function (req, res) {
-  console.log(req.body);
+  global.console.log(req.body);
   users.push(req.body.text);
   res.redirect("/pug");
 });
 
 app.get('/form', (req, res) => {
-  console.log(req.query);
+  global.console.log(req.query);
   res.send('hello form!');
 });
 
 app.get('/get', (req, res) => {
-  console.log(req.query);
+  global.console.log(req.query);
   res.send('hello get!')
 });
 
 app.post('/post', (req, res) => {
-  console.log(req.body, req.fields);
-  console.log('пришел');
+  global.console.log(req.body, req.fields);
+  global.console.log('пришел');
   res.send('hello post!');
 });
 
-global.console.log('dirname: ', __dirname);
-
 app.use(express.static(path.join(__dirname, '/build')));
 
-app.listen(port, global.console.log(`Run server on port ${port}`));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-var http = require("http");
-var url = require("url");
-var querystring = require("querystring");
-var static = require("node-static");
-var express = require("express");
-var bodyParser = require("body-parser");
-const config = require("./config");
-
-var app = express();
-
-const users = ["Andrey", "Sergey", "Yura"];
-
-app.use(
-  bodyParser.urlencoded({
-    extended: false
+//MongoDB
+database()
+  .then(info => {
+    global.console.log(`Connected to ${info.host}:${info.port}/${info.name}`);
+    app.listen(port, () =>
+      global.console.log(`Example app listening on port ${port}!`)
+    );
   })
-);
-
-app.set("view engine", "pug");
-
-app.get("/", function(req, res) {
-  res.render("index", {
-    title: "server NodeJS",
-    users: users
+  .catch(() => {
+    global.console.error('Unable to connect to database');
+    process.exit(1);
   });
-});
 
-app.get("/create", function(req, res) {
-  res.render("create");
-});
 
-app.post("/create", function(req, res) {
-  console.log(req.body);
-  users.push(req.body.text);
-  res.redirect("/");
-});
-
-app.listen(config.PORT, () => {
-  console.log(`сервер запущен на порту ${config.PORT}`);
-});
-
-app.use(express.static(".")); //
-*/
+// app.listen(port, global.console.log(`Run server on port ${port}`));
