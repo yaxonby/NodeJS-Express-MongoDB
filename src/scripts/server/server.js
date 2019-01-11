@@ -3,6 +3,9 @@ const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
 const formidableMiddleware = require('express-formidable');
+const config = require('../../../config.js');
+
+console.log(config.PORT);
 
 //app.use(formidableMiddleware());
 
@@ -22,7 +25,7 @@ app.use(myLogger);
 app.set('views', './src/views');
 app.set('view engine', 'pug');
 
-const port = 3000;
+const port = config.PORT;
 let users = ['Tolik', 'Lena'];
 
 app.get('/pug', function (req, res) {
