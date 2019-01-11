@@ -4,8 +4,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const formidableMiddleware = require('express-formidable');
 
-
-app.use(formidableMiddleware());
+//app.use(formidableMiddleware());
 
 app.use(
   bodyParser.urlencoded({
@@ -20,18 +19,24 @@ var myLogger = function (req, res, next) {
 
 app.use(myLogger);
 
-app.set('views', '../../views');
+app.set('views', './src/views');
 app.set('view engine', 'pug');
 
 const port = 3000;
 let users = ['Tolik', 'Lena'];
 
-
-
 app.get('/pug', function (req, res) {
   res.render('index', {
     users: users
   })
+});
+
+app.get('/create', (req, res) => res.render('create'));
+
+app.post("/create", function (req, res) {
+  console.log(req.body);
+  users.push(req.body.text);
+  res.redirect("/pug");
 });
 
 app.get('/form', (req, res) => {
@@ -52,7 +57,7 @@ app.post('/post', (req, res) => {
 
 global.console.log('dirname: ', __dirname);
 
-app.use(express.static(path.join(__dirname, '/dist')));
+app.use(express.static(path.join(__dirname, '/build')));
 
 app.listen(port, global.console.log(`Run server on port ${port}`));
 

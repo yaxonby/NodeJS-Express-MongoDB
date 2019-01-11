@@ -6,4 +6,8 @@ html
     ul
       li hi
       li what
-      a(href="") tut.by ok
+      a(href="") link
+      ul
+        each val, index in users
+          li= index + ': ' + val
+      a(href="create") add name
