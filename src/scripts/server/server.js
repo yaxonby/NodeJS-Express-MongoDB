@@ -38,39 +38,6 @@ database()
 
 //MongoDB
 
-function blog(req) {
-  const {
-    title,
-    author,
-    body
-  } = req.body;
-
-  var postUser = new Post({
-    title,
-    author,
-    body
-  });
-
-
-  postUser
-    .save()
-    .then(add => global.console.log("добавлено", add))
-    .catch(error => global.console.log(error));
-
-  Post.find(function (err, record) {
-    if (err) return global.console.error(err);
-    global.console.log(record);
-    posts = record;
-  });
-}
-
-function blogFind() {
-  Post.find(function (err, record) {
-    if (err) return global.console.error(err);
-    global.console.log(record);
-    posts = record;
-  });
-}
 
 // Server
 //-------
@@ -89,7 +56,6 @@ var myLogger = function (req, res, next) {
 };
 
 app.use(myLogger);
-
 app.set("views", "./src/views");
 app.set("view engine", "pug");
 
@@ -100,19 +66,55 @@ app.get("/pug", function (req, res) {
 });
 
 app.get("/create", function (req, res) {
-  blogFind();
-  res.render("create", {
-    posts: posts
+
+  Post.find(function (err, record) {
+    if (err) return global.console.error(err);
+    global.console.log(record);
+  }).then((posts) => {
+    global.console.log('----------posts--------', posts)
+    res.render("create", {
+      posts: posts
+    })
   });
 });
 
 app.post("/create", function (req, res) {
-  global.console.log(req.body);
-  //users.push(req.body);
-  blog(req);
-  res.render("create", {
-    posts: posts
+  const {
+    title,
+    author,
+    body,
+    created_at
+  } = req.body;
+
+  var postUser = new Post({
+    title,
+    author,
+    body,
+    created_at
   });
+
+  postUser
+    .save()
+    .then(add => {
+      global.console.log("добавлено", add);
+
+
+      Post.find(function (err, record) {
+        if (err) return global.console.error(err);
+        global.console.log(record);
+      }).then((posts) => {
+        global.console.log('//////////////posts///////////////', posts)
+        res.render("create", {
+          posts: posts
+        })
+      });
+
+
+
+      //  res.render("create");
+    })
+    .catch(error => global.console.log(error));
+
 });
 
 app.get("/form", (req, res) => {
