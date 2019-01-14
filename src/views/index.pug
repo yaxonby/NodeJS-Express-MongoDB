@@ -1,13 +1,14 @@
-html
-  head
-    title= title
-  body
-    h1 HI---!!!
-    ul
-      li hi
-      li what
-      a(href="") link
-      ul
-        each val, index in users
-          li= index + ': ' + val
-      a(href="create") add name
+include layout/_head.pug
+body
+  header.header
+    div.container
+      a(href="").logo
+      nav.menu MENU NAV
+  section.main
+    div.container
+      article.content CONTENT
+      aside.sidebar SIDEBAR
+  footer.footer
+    div.container FOOTER
+  a(href="create") add name
+include layout/_footer.pug

@@ -1,0 +1,31 @@
+@import 'reset';
+@import 'grid';
+
+$blackColor: #333;
+$whiteColor: #fff;
+$greyColor: #e8e8e8;
+$primaryColor: #08aef1;
+$secondaryColor: #d9ab4d;
+$freeSpace: 15px;
+$headerHeight: 49px;
+$footerHeight: 49px;
+
+body {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    -ms-flex: auto;
+    flex: auto;
+    background-color: green;
+    color: black;
+    font-family: Lato;
+}
+
+@import '_header';
+@import '_main';
+@import '_footer';

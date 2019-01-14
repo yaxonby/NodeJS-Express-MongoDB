@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+//
+textarea,
+input,
+button {
+    outline: none;
+}
+
+html {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+
+}

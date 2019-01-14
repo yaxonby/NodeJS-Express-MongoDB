@@ -17,6 +17,7 @@ const gulpif = require("gulp-if");
 const babel = require("gulp-babel");
 const yargs = require("yargs"); //<---- console
 const autoprefixer = require('gulp-autoprefixer');
+const browserSync = require('browser-sync').create();
 
 // Build Directories
 // ----
@@ -48,7 +49,9 @@ exports.buildStyles = () =>
         compatibility: 'ie8'
     })))
     .pipe(dest(dirs.dest))
-    .pipe(livereload());
+    .pipe(browserSync.reload({
+        stream: true
+    }));
 
 // Autoprefixer
 exports.autoprefixer = () =>
@@ -61,10 +64,18 @@ exports.autoprefixer = () =>
 
 // Views
 exports.buildViews = () =>
-    src(sources.views)
-    .pipe(pug())
+    src(dirs.src + '/views/index.pug')
+    .pipe(pug({
+        pretty: true
+    }))
+    .pipe(dest(dirs.dest))
+    .pipe(src(sources.views))
+    .pipe(pug({
+        pretty: true
+    }))
     .pipe(dest(dirs.dest))
     .pipe(livereload());
+//.pipe(browserSync.reload());
 
 
 // Scripts
@@ -76,11 +87,13 @@ exports.buildScripts = () =>
         })
     )
     .pipe(dest(dirs.dest))
-    .pipe(livereload());
+//.pipe(browserSync.reload());
 
 // Clean
 exports.clean = () =>
-    del(["build"]);
+    del(["build\scripts\**", "build\styles\**",
+        "build\views\**", "build\*.*", "!build/images"
+    ]);
 
 // Watch Task
 exports.devWatch = () => {
@@ -88,13 +101,24 @@ exports.devWatch = () => {
     watch(sources.styles, exports.buildStyles);
     watch(sources.views, exports.buildViews);
     watch(sources.scripts, exports.buildScripts);
+
 }
+
+// Server run
+exports.server = () => {
+    browserSync.init({
+        server: {
+            baseDir: dirs.dest
+        },
+        notify: false
+    });
+};
 
 // Development Task
 exports.dev = series(
     exports.clean,
     parallel(exports.buildStyles, exports.autoprefixer, exports.buildViews, exports.buildScripts),
-    exports.devWatch
+    parallel(exports.devWatch, exports.server)
 );
 
 // Serve Task

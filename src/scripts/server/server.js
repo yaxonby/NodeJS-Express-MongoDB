@@ -23,8 +23,8 @@ database()
     global.console.log(`Connected to ${info.host}:${info.port}/${info.name}`);
     app.listen(port, () => {
       Post.find(function (err, record) {
-        if (err) return global.console.error('ошибка', err);
-        global.console.log('запись ', record);
+        if (err) return global.console.error("ошибка", err);
+        global.console.log("запись ", record);
         posts = record;
       });
 
@@ -37,7 +37,6 @@ database()
   });
 
 //MongoDB
-
 
 // Server
 //-------
@@ -58,6 +57,12 @@ var myLogger = function (req, res, next) {
 app.use(myLogger);
 app.set("views", "./src/views");
 app.set("view engine", "pug");
+app.use(
+  "/javascripts",
+  express.static(path.join(__dirname, "../../../node_modules", "jquery", "dist"))
+);
+
+app.use("/styles", express.static(path.join(__dirname, "../../../build/styles")));
 
 app.get("/pug", function (req, res) {
   res.render("index", {
@@ -66,15 +71,14 @@ app.get("/pug", function (req, res) {
 });
 
 app.get("/create", function (req, res) {
-
   Post.find(function (err, record) {
     if (err) return global.console.error(err);
     global.console.log(record);
-  }).then((posts) => {
-    global.console.log('----------posts--------', posts)
+  }).then(posts => {
+    global.console.log("----------posts--------", posts);
     res.render("create", {
       posts: posts
-    })
+    });
   });
 });
 
@@ -98,23 +102,19 @@ app.post("/create", function (req, res) {
     .then(add => {
       global.console.log("добавлено", add);
 
-
       Post.find(function (err, record) {
         if (err) return global.console.error(err);
         global.console.log(record);
-      }).then((posts) => {
-        global.console.log('//////////////posts///////////////', posts)
+      }).then(posts => {
+        global.console.log("//////////////posts///////////////", posts);
         res.render("create", {
           posts: posts
-        })
+        });
       });
-
-
 
       //  res.render("create");
     })
     .catch(error => global.console.log(error));
-
 });
 
 app.get("/form", (req, res) => {
@@ -133,7 +133,7 @@ app.post("/post", (req, res) => {
   res.send("hello post!");
 });
 
-app.use(express.static(path.join(__dirname, "/build")));
+
 
 //run server
 
