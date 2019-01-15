@@ -1,14 +1,23 @@
 include layout/_head.pug
 body
   header.header
-    div.container
-      a(href="").logo
-      nav.menu MENU NAV
-  section.main
-    div.container
-      article.content CONTENT
-      aside.sidebar SIDEBAR
-  footer.footer
-    div.container FOOTER
-  a(href="create") add name
+    .container
+    a.logo(href="")
+    nav.menu
+      ul.menulist
+        li Home
+        li About
+        li Contact
+  main.main
+    section.content
+      section.content_items
+        article.content_item
+          p.content_post Post
+      section.box
+        article.box_login
+          h3 Login
+        article.box_
+          h3 Box
+
+  footer.footer 2019
 include layout/_footer.pug
