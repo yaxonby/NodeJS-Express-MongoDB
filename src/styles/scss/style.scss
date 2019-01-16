@@ -1,13 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
 .header {
-    border: 1px grey solid;
 
-    .menulist {
-        color: rgb(113, 0, 128);
 
-        li {
-            display: inline;
-            color: green;
+    .container {
+        display: flex;
+        //height: 100px;
+        //width: 100%;
+        border: 1px grey solid;
+        flex-direction: rows;
+        justify-content: space-between;
+
+        .logo {
+            display: flex;
+            height: 100px;
+            width: 260px;
+            border: 1px rgb(165, 81, 81) solid;
+            background-image: url('../../images/logo/Blog.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .menu {
+            display: flex;
+            border: 1px red solid;
+
+            .menu_list {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+                border: 1px yellow solid;
+
+                li {
+                    display: inline;
+                    color: green;
+                }
+
+            }
+        }
+    }
+}
+
+.main {
+    .content {
+        display: flex;
+        flex-direction: row;
+        border: 1px grey solid;
+        flex-grow: 1;
+
+        .content_items {
+            flex: 3;
+            border: 1px green solid;
+            min-height: 100px;
+        }
+
+        .box {
+            flex: 1;
+            border: 1px blue solid;
+
+            .box_login {
+                border: 1px red solid;
+            }
+
+            .box_ {
+                border: 1px red solid;
+            }
         }
 
     }
+}
+
+.footer {
+    border: 1px green solid;
+    align-self: center;
 }

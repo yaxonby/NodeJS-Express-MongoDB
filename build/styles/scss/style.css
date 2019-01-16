@@ -1,7 +1,53 @@
-.header {
-  border: 1px grey solid; }
-  .header .menulist {
-    color: #710080; }
-    .header .menulist li {
-      display: inline;
-      color: green; }
+* {
+  margin: 0;
+  padding: 0; }
+
+body {
+  display: flex;
+  flex-direction: column; }
+
+.header .container {
+  display: flex;
+  border: 1px grey solid;
+  flex-direction: rows;
+  justify-content: space-between; }
+  .header .container .logo {
+    display: flex;
+    height: 100px;
+    width: 260px;
+    border: 1px #a55151 solid;
+    background-image: url("../../images/logo/Blog.jpg");
+    background-size: contain;
+    background-repeat: no-repeat; }
+  .header .container .menu {
+    display: flex;
+    border: 1px red solid; }
+    .header .container .menu .menu_list {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border: 1px yellow solid; }
+      .header .container .menu .menu_list li {
+        display: inline;
+        color: green; }
+
+.main .content {
+  display: flex;
+  flex-direction: row;
+  border: 1px grey solid;
+  flex-grow: 1; }
+  .main .content .content_items {
+    flex: 3;
+    border: 1px green solid;
+    min-height: 100px; }
+  .main .content .box {
+    flex: 1;
+    border: 1px blue solid; }
+    .main .content .box .box_login {
+      border: 1px red solid; }
+    .main .content .box .box_ {
+      border: 1px red solid; }
+
+.footer {
+  border: 1px green solid;
+  align-self: center; }
