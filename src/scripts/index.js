@@ -1,3 +1,9 @@
+console.log(1);
+setTimeout(() => console.log(8), 0);
+console.log(3);
+
+
+
 console.log("run client");
 
 let random = Math.random();

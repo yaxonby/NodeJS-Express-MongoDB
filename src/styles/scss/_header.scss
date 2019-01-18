@@ -1,0 +1,40 @@
+.header {
+    //flex-grow: 1;
+
+    .container {
+        display: flex;
+        //height: 100px;
+        //width: 100%;
+        border: 1px grey solid;
+        flex-direction: rows;
+        justify-content: space-between;
+
+        .logo {
+            display: flex;
+            height: 100px;
+            width: 260px;
+            border: 1px rgb(165, 81, 81) solid;
+            background-image: url('../../images/logo/Blog.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .menu {
+            display: flex;
+            border: 1px red solid;
+
+            .menu_list {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+                border: 1px yellow solid;
+
+                li {
+                    display: inline;
+                    color: green;
+                }
+
+            }
+        }
+    }
+}

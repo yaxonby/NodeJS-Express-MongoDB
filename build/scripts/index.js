@@ -1,5 +1,10 @@
 "use strict";
 
+console.log(1);
+setTimeout(function () {
+  return console.log(8);
+}, 0);
+console.log(3);
 console.log("run client");
 var random = Math.random();
 console.log(random);
